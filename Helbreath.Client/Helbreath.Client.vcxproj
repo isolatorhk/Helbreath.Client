@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,6 +111,91 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="char\CharInfo.cpp" />
+    <ClCompile Include="char\Curse.cpp" />
+    <ClCompile Include="char\item\BuildItem.cpp" />
+    <ClCompile Include="char\item\Item.cpp" />
+    <ClCompile Include="char\item\ItemName.cpp" />
+    <ClCompile Include="char\Magic.cpp" />
+    <ClCompile Include="char\Skill.cpp" />
+    <ClCompile Include="DirectX\DXC_ddraw.cpp" />
+    <ClCompile Include="DirectX\DXC_dinput.cpp" />
+    <ClCompile Include="DirectX\DXC_dsound.cpp" />
+    <ClCompile Include="DirectX\Effect.cpp" />
+    <ClCompile Include="DirectX\Mydib.cpp" />
+    <ClCompile Include="DirectX\SoundBuffer.cpp" />
+    <ClCompile Include="DirectX\Sprite.cpp" />
+    <ClCompile Include="DirectX\TileSpr.cpp" />
+    <ClCompile Include="DirectX\YWSound.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Map\MapData.cpp" />
+    <ClCompile Include="Map\Tile.cpp" />
+    <ClCompile Include="Misc.cpp" />
+    <ClCompile Include="Net\Msg.cpp" />
+    <ClCompile Include="Net\XSocket.cpp" />
+    <ClCompile Include="StrTok.cpp" />
+    <ClCompile Include="UI\MouseInterface.cpp" />
+    <ClCompile Include="UI\Wmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="char\ActionID.h" />
+    <ClInclude Include="char\CharInfo.h" />
+    <ClInclude Include="char\Curse.h" />
+    <ClInclude Include="char\DynamicObjectID.h" />
+    <ClInclude Include="char\item\BuildItem.h" />
+    <ClInclude Include="char\item\Item.h" />
+    <ClInclude Include="char\item\ItemName.h" />
+    <ClInclude Include="char\Magic.h" />
+    <ClInclude Include="char\Skill.h" />
+    <ClInclude Include="DirectX\d3dtypes.h" />
+    <ClInclude Include="DirectX\DDraw.h" />
+    <ClInclude Include="DirectX\DInput.h" />
+    <ClInclude Include="DirectX\DSound.h" />
+    <ClInclude Include="DirectX\DXC_ddraw.h" />
+    <ClInclude Include="DirectX\DXC_dinput.h" />
+    <ClInclude Include="DirectX\DXC_dsound.h" />
+    <ClInclude Include="DirectX\Effect.h" />
+    <ClInclude Include="DirectX\Mydib.h" />
+    <ClInclude Include="DirectX\SoundBuffer.h" />
+    <ClInclude Include="DirectX\SoundID.h" />
+    <ClInclude Include="DirectX\Sprite.h" />
+    <ClInclude Include="DirectX\SpriteID.h" />
+    <ClInclude Include="DirectX\TileSpr.h" />
+    <ClInclude Include="DirectX\YWSound.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GlobalDef.h" />
+    <ClInclude Include="GlobalVal.h" />
+    <ClInclude Include="lan_eng.h" />
+    <ClInclude Include="lan_Spanish.h" />
+    <ClInclude Include="Map\MapData.h" />
+    <ClInclude Include="Map\Tile.h" />
+    <ClInclude Include="Misc.h" />
+    <ClInclude Include="Net\Msg.h" />
+    <ClInclude Include="Net\XSocket.h" />
+    <ClInclude Include="Res\resource.h" />
+    <ClInclude Include="StrTok.h" />
+    <ClInclude Include="UI\MouseInterface.h" />
+    <ClInclude Include="UI\Winmain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\DDRAW.LIB" />
+    <Library Include="libs\DINPUT.LIB" />
+    <Library Include="libs\DSOUND.LIB" />
+    <Library Include="libs\DXGUID.LIB" />
+    <Library Include="libs\search.lib" />
+    <Library Include="libs\WINMM.LIB" />
+    <Library Include="libs\WS2_32.LIB" />
+    <Library Include="libs\WSOCK32.LIB" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\CANCEL.bmp" />
+    <Image Include="Res\CONNECT.bmp" />
+    <Image Include="Res\htmlview(24).BMP" />
+    <Image Include="Res\icon1.ico" />
+    <Image Include="Res\_OK.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Res\resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

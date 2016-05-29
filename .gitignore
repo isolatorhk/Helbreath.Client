@@ -37,7 +37,7 @@
 *.lib
 
 # unignore
-!Helbreath.HGServerConsole/libs/*.lib
+!Helbreath.Client/libs/*.lib
 
 # Executables
 *.exe
