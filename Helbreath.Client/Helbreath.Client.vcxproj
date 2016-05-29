@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_MBCS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -91,7 +91,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_MBCS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -120,6 +120,7 @@
     <ClCompile Include="char\item\ItemName.cpp" />
     <ClCompile Include="char\Magic.cpp" />
     <ClCompile Include="char\Skill.cpp" />
+    <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="DirectX\DXC_ddraw.cpp" />
     <ClCompile Include="DirectX\DXC_dinput.cpp" />
     <ClCompile Include="DirectX\DXC_dsound.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="char\item\ItemName.h" />
     <ClInclude Include="char\Magic.h" />
     <ClInclude Include="char\Skill.h" />
+    <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="DirectX\d3dtypes.h" />
     <ClInclude Include="DirectX\DDraw.h" />
     <ClInclude Include="DirectX\DInput.h" />

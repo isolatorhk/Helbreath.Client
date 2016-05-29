@@ -657,7 +657,9 @@ BOOL CGame::bInit(HWND hWnd, HINSTANCE hInst, char * pCmdLine)
 	m_cEnterCheck = m_cTabCheck = m_cLeftArrowCheck = NULL;
 
 	ZeroMemory(m_cLogServerAddr, sizeof(m_cLogServerAddr));
-	strcpy(m_cLogServerAddr, SERVER_IP);
+	clientConfiguration = new ClientConfiguration();
+	strcpy(m_cLogServerAddr, clientConfiguration->GetIPAddress());
+
 	m_iLogServerPort = SERVER_PORT;
 
 	if (bCheckImportantFile() == FALSE)
@@ -13731,7 +13733,7 @@ void CGame::ChangeGameMode(char cMode)
 
 BOOL CGame::bReadIp()
 {	ZeroMemory(m_cLogServerAddr, sizeof(m_cLogServerAddr));
-	strcpy(m_cLogServerAddr, SERVER_IP);
+	strcpy(m_cLogServerAddr, clientConfiguration->GetIPAddress());
 	m_iLogServerPort = SERVER_PORT;
 	return TRUE;
 }
@@ -13799,7 +13801,7 @@ BOOL CGame::bReadLoginConfigFile(char * cFn)
 	return TRUE;
 DEFAULT_IP:
 	ZeroMemory(m_cLogServerAddr, sizeof(m_cLogServerAddr));
-	strcpy(m_cLogServerAddr, SERVER_IP);
+	strcpy(m_cLogServerAddr, clientConfiguration->GetIPAddress());
 	m_iLogServerPort = SERVER_PORT;
 	return TRUE;
 }
