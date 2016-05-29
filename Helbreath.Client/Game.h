@@ -53,6 +53,7 @@
 #include "char\item\BuildItem.h"
 #include "char\item\ItemName.h"
 #include "char\Curse.h"
+#include "ClientConfiguration.h"
 
 #ifdef USING_WIN_IME
 	#include <RICHEDIT.H>
@@ -1032,6 +1033,7 @@ public:
 
 	bool m_tabbedNotification;
 	int m_relicX, m_relicY;
+	ClientConfiguration *clientConfiguration;
 
 	bool m_manuAutoFill;
 };

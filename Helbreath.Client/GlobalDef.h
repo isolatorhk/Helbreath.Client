@@ -7,10 +7,9 @@
 #define MSG_WORLDNAME2			"High-Rate Server"
 #define MSG_HOMEPAGE			"http://www.helbreathlegion.net/"
 
-#define SERVER_IP			"54.171.114.99"	// dedi
-//#define SERVER_IP			"65.175.174.30" //test-Server
-//#define SERVER_IP			"192.168.1.11"
-//#define SERVER_IP			"127.0.0.1"
+#define SERVER_IP			""
+#define DNS_NAME "game.helbreathpoland.com"
+#define USE_DNS true
 #define SERVER_PORT			321
 
 #define LANG	ENGLISH
