@@ -5,7 +5,7 @@
 #define MSG_WORLDNAME1			"180/200 Low-Rate Server" // Long name for 1st server...
 #define NAME_WORLDNAME2			"WS2"
 #define MSG_WORLDNAME2			"High-Rate Server"
-#define MSG_HOMEPAGE			"http://www.helbreathlegion.net/"
+#define MSG_HOMEPAGE			"http://helbreathpoland.com/"
 
 #define SERVER_IP			""
 #define DNS_NAME "game.helbreathpoland.com"

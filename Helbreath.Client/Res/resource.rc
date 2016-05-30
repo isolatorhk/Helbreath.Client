@@ -132,11 +132,11 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "FileDescription", "Legion's Client"
+            VALUE "FileDescription", "Helbreath Poland Client"
             VALUE "FileVersion", "0, 9, 3, 0"
             VALUE "InternalName", "client"
-            VALUE "LegalCopyright", "Copyright (C) 2009"
-            VALUE "ProductName", "Helbreath Legion"
+            VALUE "LegalCopyright", "Copyright (C) 2016"
+            VALUE "ProductName", "Helbreath Poland"
             VALUE "ProductVersion", "0, 9, 3, 0"
         END
     END
