@@ -3961,7 +3961,7 @@ BOOL CGame::bDlgBoxPress_Inventory(short msX, short msY)
  short sX, sY, x1, x2, y1, y2;
 
 #ifdef _DEBUG
- AddEventList("Press Inventory", 10);
+ AddEventList(" ", 10);
 #endif
 
 	if (m_bIsDialogEnabled[2] == FALSE) return FALSE;
