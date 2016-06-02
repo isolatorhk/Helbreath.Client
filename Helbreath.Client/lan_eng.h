@@ -2026,8 +2026,8 @@
 #define MSG_NOTIFY_SKILLCFG "SKILLCFG.TXT file contains wrong infomation."
 #define MSG_NOTIFY_DIRECTX7 "This program requires DirectX7.0a!"
 
-#define MSG_NOTIFY_LEGIONPT1 "You do not have enough Legion points."
-#define MSG_NOTIFY_LEGIONPT2 " Go to http://www.helbreathlegion.net/donate.php"
+#define MSG_NOTIFY_LEGIONPT1 "You do not have enough donate points."
+#define MSG_NOTIFY_LEGIONPT2 " Go to http://www.helbreathpoland.com"
 #define MSG_NOTIFY_LEGIONPT3 " for information on how to get points."
 
 #define MSG_NOTIFY_HELP "Press F1 for news and help."

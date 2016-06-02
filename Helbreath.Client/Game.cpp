@@ -3690,11 +3690,11 @@ void CGame::UpdateScreen_OnLoading_Progress()
 	iBarWidth= (int)m_cLoading * (m_pSprite[SPRID_INTERFACE_ND_LOADING]->m_stBrush[1].szx / 100);
 	m_pSprite[SPRID_INTERFACE_ND_LOADING]->PutSpriteFastWidth(391,434, 1, iBarWidth, G_dwGlobalTime);
 
-	//PutString(239, 196, "Helbreath Legion is loading...", RGB(60,60,60));
-	//PutString(238, 195, "Helbreath Legion is loading...", RGB(230,230,230));
+	//PutString(239, 196, "Helbreath is loading...", RGB(60,60,60));
+	//PutString(238, 195, "Helbreath  is loading...", RGB(230,230,230));
 
-	//PutString(249, 261, "www.helbreathlegion.net", RGB(60,20,0));
-	//PutString(248, 260, "www.helbreathlegion.net", RGB(255,245,0));	
+	//PutString(249, 261, "helbreathpoland.com", RGB(60,20,0));
+	//PutString(248, 260, "helbreathpoland.com", RGB(255,245,0));	
 	m_DDraw.iFlip();
 
 }
@@ -3961,7 +3961,7 @@ BOOL CGame::bDlgBoxPress_Inventory(short msX, short msY)
  short sX, sY, x1, x2, y1, y2;
 
 #ifdef _DEBUG
- AddEventList("Press Inventory", 10);
+ AddEventList(" ", 10);
 #endif
 
 	if (m_bIsDialogEnabled[2] == FALSE) return FALSE;
@@ -22383,7 +22383,7 @@ void CGame::DlgBoxClick_Help(int msX, int msY)
 	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*1) && (msY < sY +50+15*2)) {
 		DisableDialogBox(18);
 #ifdef DEF_HTMLCOMMOM
-		WebDialog("http://www.helbreathlegion.net/");
+		WebDialog("http://helbreathpoland.com/");
 #else
 		EnableDialogBox(18, 900, NULL, NULL);
 #endif
@@ -22475,13 +22475,13 @@ void CGame::DlgBoxClick_Help(int msX, int msY)
 		, SysTime.wHour, SysTime.wMinute, SysTime.wSecond
 		, LongMapName);
 	PutAlignedString(500, 600, 30, SStime, 255, 255, 255); 
-	PutString_SprFont3(500, 390, "www.helbreathlegion.net", 20, 20, 0, TRUE, 2);
+	PutString_SprFont3(500, 390, "helbreathpoland.com", 20, 20, 0, TRUE, 2);
 
 		   _mkdir("SAVE");
 	   for (i = 0; i < 1000; i++)
 	   {  
 		   ZeroMemory(cFn, sizeof(cFn));
-		   wsprintf(cFn, "SAVE\\Helbreath Legion #%d.bmp", i);
+		   wsprintf(cFn, "SAVE\\Helbreath Poland #%d.bmp", i);
 		 
 			if(_access(cFn, 0 ) == -1){
 
@@ -27826,6 +27826,12 @@ void CGame::DlbBoxDoubleClick_Inventory(short msX, short msY)
 				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, cItemID, m_stDialogBoxInfo[39].sV3, NULL, m_pItemList[cItemID]->m_cName, m_stDialogBoxInfo[39].sV4); 
 					return;
 			}	}
+			
+			if (m_bIsDialogEnabled[14])
+			{
+				bItemDrop_Bank(msX, msY);
+				return;
+			}
 
 			if (   (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_USE_DEPLETE)
 				|| (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_USE_PERM)
@@ -33022,9 +33028,9 @@ void CGame::DrawDialogBox_CityHallMenu(short msX, short msY, short msZ, char cLB
 
 		// Legion point services
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 170) && (msY < sY + 195))
-			PutAlignedString(sX, sX + szX, sY + 170, "Legion points' services", 255,255,255);
+			PutAlignedString(sX, sX + szX, sY + 170, " points' services", 255,255,255);
 		else
-			PutAlignedString(sX, sX + szX, sY + 170, "Legion points' services", 4,0,50);
+			PutAlignedString(sX, sX + szX, sY + 170, " points' services", 4,0,50);
 
 		// Teleport list
 		if ( (m_bIsCrusadeMode==FALSE))
@@ -33169,7 +33175,7 @@ void CGame::DrawDialogBox_CityHallMenu(short msX, short msY, short msZ, char cLB
 		break;
 
 	case LEGIONPTSSERVICES:
-		wsprintf(cTxt, "Legion points: %u", m_cash);
+		wsprintf(cTxt, "points: %u", m_cash);
 		PutAlignedString(sX, sX + szX, sY + 35,  cTxt, 55,25,25);
 		if ((msX > sX + 160) && (msX < sX + szX) && (msY > sY + 35) && (msY < sY + 50))
 			PutAlignedString(sX + 160, sX + szX, sY + 35, "Update" , 255,255,255);
@@ -36250,8 +36256,8 @@ void CGame::DrawDialogBox_SysMenu(short msX, short msY, char cLB)
 			 DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY +225, 37);
 		else DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY +225, 36);
 	}else if (m_cRestartCount == -1)	{
-		PutString(sX + 115, sY + 227, "www.helbreathlegion.net", RGB(10,0,0));
-		PutString(sX + 114, sY + 226, "www.helbreathlegion.net", RGB(45,25,25));
+		PutString(sX + 115, sY + 227, "helbreathpoland.com", RGB(10,0,0));
+		PutString(sX + 114, sY + 226, "helbreathpoland.com", RGB(45,25,25));
 	}
 }
 
