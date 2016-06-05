@@ -3906,7 +3906,7 @@ BOOL CGame::_bCheckDlgBoxClick(short msX, short msY)
 				DlgBoxClick_CMDHallMenu(msX, msY);
 				break;
 			case 53:
-				DlgBoxClick_DKMenuWeapons(msX, msY);
+				DlgBoxClick_DKMenuSet(msX, msY);
 				break;
 			case 43:
 				DlgBoxClick_FriendList(msX, msY);
@@ -16210,7 +16210,7 @@ void CGame::DrawDialogBoxs(short msX, short msY, short msZ, char cLB)
 			DrawDialogBox_CMDHallMenu(msX, msY);
 			break;
 		case 53:
-			DrawDialogBox_DKMenuWeapons(msX, msY); 
+			DrawDialogBox_DKMenuSet(msX, msY); 
 			break;
 		}
 	}
@@ -43589,7 +43589,7 @@ void CGame::DrawDialogBox_Shop(short msX, short msY, short msZ, char cLB)
 	}
 }
 
-void CGame::DrawDialogBox_DKMenuWeapons(int msX, int msY)
+void CGame::DrawDialogBox_DKMenuSet(int msX, int msY)
 {
 	short sX, sY, szX;
 
@@ -43620,7 +43620,7 @@ void CGame::DrawDialogBox_DKMenuWeapons(int msX, int msY)
 	}
 }
 
-void CGame::DlgBoxClick_DKMenuWeapons(int msX, int msY)
+void CGame::DlgBoxClick_DKMenuSet(int msX, int msY)
 { short sX, sY;
 	sX = m_stDialogBoxInfo[53].sX;
 	sY = m_stDialogBoxInfo[53].sY;

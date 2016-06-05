@@ -284,8 +284,8 @@ public:
 
 	void DrawDialogBox_ConfirmExchange(short msX, short msY); //41
 
-	void DrawDialogBox_DKMenuWeapons(int msX, int msY); // 53
-	void DlgBoxClick_DKMenuWeapons(int msX, int msY);
+	void DrawDialogBox_DKMenuSet(int msX, int msY); // 53
+	void DlgBoxClick_DKMenuSet(int msX, int msY);
 
 	// Slates - Alastor
 	void bItemDrop_Slates();
