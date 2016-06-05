@@ -43590,64 +43590,54 @@ void CGame::DrawDialogBox_Shop(short msX, short msY, short msZ, char cLB)
 }
 
 void CGame::DrawDialogBox_DKMenuWeapons(int msX, int msY)
-{ short sX, sY, szX;
+{
+	short sX, sY, szX;
 
 	sX = m_stDialogBoxInfo[53].sX;
 	sY = m_stDialogBoxInfo[53].sY;
 	szX = m_stDialogBoxInfo[53].sSizeX;
 	DrawNewDialogBox(SPRID_INTERFACE_ND_GAME2, sX, sY, 2);
 
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*0) && (msY < sY +50+15*1))
-		 PutAlignedString(sX, sX+szX, sY + 50 +15*0, "Dark Mage Wand", 255, 255, 255);
-	else PutAlignedString(sX, sX+szX, sY + 50 +15*0, "Dark Mage Wand", 4, 0, 50);
-
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*1) && (msY < sY +50+15*2))
-		 PutAlignedString(sX, sX+szX, sY + 50 +15*1, "Dark Knight Rapier", 255, 255, 255);
-	else PutAlignedString(sX, sX+szX, sY + 50 +15*1, "Dark Knight Rapier", 4, 0, 50);
-
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*2) && (msY < sY +50+15*3))
-		PutAlignedString(sX, sX+szX, sY + 50 +15*2, "Dark Knight Great Sword", 255, 255, 255);
-	else PutAlignedString(sX, sX+szX, sY + 50 +15*2, "Dark Knight Great Sword", 4, 0, 50);
-
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*3) && (msY < sY +50+15*4))
-		PutAlignedString(sX, sX+szX, sY + 50 +15*3, "Dark Knight Flameberge", 255, 255, 255);
-	else PutAlignedString(sX, sX+szX, sY + 50 +15*3, "Dark Knight Flameberge", 4, 0, 50);
-
-	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY))
-		 DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 1);
-	else DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 0);
-
+	if ((msX >= sX + 25) && (msX <= sX + 248) && (msY >= sY + 50 + 15 * 0) && (msY < sY + 50 + 15 * 1)) {
+		PutAlignedString(sX, sX + szX, sY + 50 + 15 * 0, "Dark Mage Set", 255, 255, 255);
+	}
+	else {
+		PutAlignedString(sX, sX + szX, sY + 50 + 15 * 0, "Dark Mage Set", 4, 0, 50);
 	}
 
-// Jehovah
+	if ((msX >= sX + 25) && (msX <= sX + 248) && (msY >= sY + 50 + 15 * 1) && (msY < sY + 50 + 15 * 2)) {
+		PutAlignedString(sX, sX + szX, sY + 50 + 15 * 1, "Dark Knight Set", 255, 255, 255);
+	}
+	else {
+		PutAlignedString(sX, sX + szX, sY + 50 + 15 * 1, "Dark Knight Set", 4, 0, 50);
+	}
+
+	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY)) {
+		DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 1);
+	}
+	else {
+		DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 0);
+	}
+}
+
 void CGame::DlgBoxClick_DKMenuWeapons(int msX, int msY)
 { short sX, sY;
 	sX = m_stDialogBoxInfo[53].sX;
 	sY = m_stDialogBoxInfo[53].sY;
 
-	// DK Weapons
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*0) && (msY < sY +50+15*1) && ( m_iLevel >= MAXLEVEL)) // Dark Mage Staff
-		{	bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 10, NULL, NULL, "Gail", NULL);
-			PlaySound('E', 14, 5);
-		}
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*1) && (msY < sY +50+15*2) && ( m_iLevel >= MAXLEVEL)) // Dark Knight Rapier
-		{	bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 11, NULL, NULL, "Gail", NULL);
-			PlaySound('E', 14, 5);
-		}
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*2) && (msY < sY +50+15*3) && ( m_iLevel >= MAXLEVEL)) // Dark Knight Great Sword
-		{	bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 12, NULL, NULL, "Gail", NULL);
-			PlaySound('E', 14, 5);
-		}
-	if ((msX >= sX+25) && (msX <= sX+248) && (msY >= sY +50+15*3) && (msY < sY +50+15*4) && ( m_iLevel >= MAXLEVEL)) // Dark Knight Flameberge
-		{	bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 13, NULL, NULL, "Gail", NULL);
-			PlaySound('E', 14, 5);
-		}
+	if ((msX >= sX + 25) && (msX <= sX + 248) && (msY >= sY + 50 + 15 * 0) && (msY < sY + 50 + 15 * 1) && (m_iLevel >= MAXLEVEL)) {
+		bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 10, NULL, NULL, "Gail", NULL);
+		PlaySound('E', 14, 5);
+	}
+	if ((msX >= sX + 25) && (msX <= sX + 248) && (msY >= sY + 50 + 15 * 1) && (msY < sY + 50 + 15 * 2) && (m_iLevel >= MAXLEVEL)) {
+		bSendCommand(MSGID_REQUEST_DKITEM, NULL, NULL, 11, NULL, NULL, "Gail", NULL);
+		PlaySound('E', 14, 5);
+	}
 	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY)) {
 		PlaySound('E', 14, 5);
 		DisableDialogBox(53);
 	}
 }
-
 
 void CGame::LoadMuteList()
 {
