@@ -2933,33 +2933,33 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 				framePositions.clear();
 			}
 
-			m_hPakFile = CreateFile("sprites\\lgn_login.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+			m_hPakFile = CreateFile("sprites\\LoginDialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
 				ReadFramePositions(m_hPakFile, framePositions, 3);
 				m_pSprite[SPRID_INTERFACE_ND_LOGIN] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_login", 0, FALSE, &framePositions);
 #ifdef MAKE_ACCOUNT
-				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_login", 1, FALSE, &framePositions);
-				m_pSprite[SPRID_INTERFACE_ND_AGREEMENT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_login", 2, FALSE, &framePositions);
+				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "LoginDialog", 1, FALSE, &framePositions);
+				m_pSprite[SPRID_INTERFACE_ND_AGREEMENT] = new class CSprite(m_hPakFile, &m_DDraw, "LoginDialog", 2, FALSE, &framePositions);
 #endif
 				CloseHandle(m_hPakFile);
 				framePositions.clear();
 			}
 #ifdef MAKE_ACCOUNT			// CLEROTH - ACC - Snoopy: fixed to use without special pak
-			m_hPakFile = CreateFile("sprites\\lgn_newacc.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+			m_hPakFile = CreateFile("sprites\\CreateNewAcc.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
-				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_newacc", 0, FALSE);
+				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "CreateNewAcc", 0, FALSE);
 				CloseHandle(m_hPakFile);
 			}else
-			{	m_hPakFile = CreateFile("sprites\\lgn_dialog.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
-				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_dialog", 2, FALSE);
+			{	m_hPakFile = CreateFile("sprites\\New-Dialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 2, FALSE);
 				CloseHandle(m_hPakFile);
 			}
 #endif
-			m_hPakFile = CreateFile("sprites\\lgn_dialog.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+			m_hPakFile = CreateFile("sprites\\New-Dialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
 				ReadFramePositions(m_hPakFile, framePositions, 3);
-				m_pSprite[SPRID_INTERFACE_ND_MAINMENU] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_dialog", 1, FALSE, &framePositions);
-				m_pSprite[SPRID_INTERFACE_ND_QUIT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_dialog", 2, FALSE, &framePositions);
+				m_pSprite[SPRID_INTERFACE_ND_MAINMENU] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 1, FALSE, &framePositions);
+				m_pSprite[SPRID_INTERFACE_ND_QUIT] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 2, FALSE, &framePositions);
 				CloseHandle(m_hPakFile);
 				framePositions.clear();
 			}
@@ -3013,14 +3013,14 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 		break;
 	case 8:
 		{	
-			MakeLegionTileSpr( "lgn_T223-225", 223, 3, TRUE);
+			//MakeLegionTileSpr( "lgn_T223-225", 223, 3, TRUE);
 			MakeTileSpr( "Tile226-229", 226, 4, TRUE);
 			MakeTileSpr( "objects5", 230, 9, TRUE);	// Snoopy
 			MakeTileSpr( "objects6", 238, 4, TRUE);	// Snoopy
 			MakeTileSpr( "objects7", 242, 7, TRUE);	// Snoopy
 			MakeLegionTileSpr( "lgn_objects", 249, 1, TRUE);
 			MakeTileSpr( "maptiles2", 300, 15, TRUE);
-			MakeLegionTileSpr( "lgn_maptiles", 315, 5, TRUE);
+		    MakeLegionTileSpr( "lgn_maptiles", 315, 5, TRUE);
 			MakeTileSpr( "maptiles4", 320, 10, TRUE);
 			MakeTileSpr( "maptiles5", 330, 19, TRUE);
 			MakeTileSpr( "maptiles6", 349, 4, TRUE);
