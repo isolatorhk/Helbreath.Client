@@ -1730,10 +1730,8 @@ BOOL CGame::bSendCommand(DWORD dwMsgID, WORD wCommand, char cDir, int iV1, int i
 
 		iRet = m_pGSock->iSendMsg(cMsg, 6 + strlen(pString));
 		break;
-
-	case MSGID_REQUEST_LGNPTS:
+	
 	case MSGID_REQUEST_LGNSVC:
-
 		*wp = wCommand;
 
 		iRet = m_pGSock->iSendMsg(cMsg, 6);
@@ -19662,8 +19660,7 @@ BOOL CGame::bDlgBoxPress_Character(short msX, short msY)
 
 void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 {
-	static const enum modes{
-		LEGIONPTSSERVICES =		9,
+	static const enum modes{		
 		TELEPORTLIST =		10
 	};
 	short sX, sY;
@@ -19694,15 +19691,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 		{	if (m_stQuest.sQuestType == NULL) return;
 			m_stDialogBoxInfo[13].cMode = 8;
 			PlaySound('E', 14, 5);
-		}
-
-		// Legion point services
-		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 170) && (msY < sY + 195))
-		{
-			m_stDialogBoxInfo[13].cMode = LEGIONPTSSERVICES;
-			PlaySound('E', 14, 5);
-			bSendCommand(MSGID_REQUEST_LGNPTS, NULL,NULL,0,0,0,NULL);			
-		}
+		}		
 
 		// Teleport List
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 195) && (msY < sY + 220))
@@ -19838,33 +19827,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 			PlaySound('E', 14, 5);
 			break;
 		}
-		break;
-
-	case LEGIONPTSSERVICES:
-		if ((msX > sX + 160) && (msX < sX + 230) && (msY > sY + 35) && (msY < sY + 50))
-		{
-			PlaySound('E', 14, 5);
-			bSendCommand(MSGID_REQUEST_LGNPTS, NULL,NULL,0,0,0,NULL);
-		break;
-		}
-
-		for(i =0; i < 16; i++)
-		{
-			if ((msX > sX + 35) && (msX < sX + szX - 20) && (msY > sY + 73 + 15*i) && (msY < sY + 87 + 15*i))
-			{
-				if(m_cash >= lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].price)
-				{
-					bSendCommand(MSGID_REQUEST_LGNSVC, lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].cmd, NULL, NULL, NULL, NULL, NULL);
-					m_cash -= lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].price;
-				}else{
-					AddEventList(MSG_NOTIFY_LEGIONPT1, CHAT_GM, TRUE);
-					AddEventList(MSG_NOTIFY_LEGIONPT2, CHAT_GM, TRUE);
-					AddEventList(MSG_NOTIFY_LEGIONPT3, CHAT_GM, TRUE);
-				}
-				break;
-			}
-		}
-		break;
+		break;	
 
 	case TELEPORTLIST:
 		if( m_iTeleportMapCount > 0 )
@@ -33033,13 +32996,7 @@ void CGame::DrawDialogBox_CityHallMenu(short msX, short msY, short msZ, char cLB
 		{	if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 145) && (msY < sY + 170))
 				 PutAlignedString(sX, sX + szX, sY + 145, DRAW_DIALOGBOX_CITYHALL_MENU11, 255,255,255);//"
 			else PutAlignedString(sX, sX + szX, sY + 145, DRAW_DIALOGBOX_CITYHALL_MENU11, 4,0,50);//"
-		}else    PutAlignedString(sX, sX + szX, sY + 145, DRAW_DIALOGBOX_CITYHALL_MENU11, 65,65,65);//"
-
-		// Legion point services
-		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 170) && (msY < sY + 195))
-			PutAlignedString(sX, sX + szX, sY + 170, " points' services", 255,255,255);
-		else
-			PutAlignedString(sX, sX + szX, sY + 170, " points' services", 4,0,50);
+		}else    PutAlignedString(sX, sX + szX, sY + 145, DRAW_DIALOGBOX_CITYHALL_MENU11, 65,65,65);//"		
 
 		// Teleport list
 		if ( (m_bIsCrusadeMode==FALSE))
@@ -33181,64 +33138,7 @@ void CGame::DrawDialogBox_CityHallMenu(short msX, short msY, short msZ, char cLB
 		if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY))
 			 DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 3);
 		else DrawNewDialogBox(SPRID_INTERFACE_ND_BUTTON, sX + RBTNPOSX, sY + BTNPOSY, 2);
-		break;
-
-	case LEGIONPTSSERVICES:
-		wsprintf(cTxt, "points: %u", m_cash);
-		PutAlignedString(sX, sX + szX, sY + 35,  cTxt, 55,25,25);
-		if ((msX > sX + 160) && (msX < sX + szX) && (msY > sY + 35) && (msY < sY + 50))
-			PutAlignedString(sX + 160, sX + szX, sY + 35, "Update" , 255,255,255);
-		else
-			PutAlignedString(sX + 160, sX + szX, sY + 35, "Update" , 4,0,50);
-
-		PutAlignedString(sX - 20, sX + szX, sY + 55, "Name", 55,25,25);
-		PutAlignedString(sX + 180, sX + szX, sY + 55, "Price" , 55,25,25);
-
-		
-		d1 = (double)m_stDialogBoxInfo[13].sView;
-		d2 = (double)(CMD_LGNSVC_MAX-16);
-		d3 = (274.0f * d1)/d2;
-		iPointerLoc = (int)(d3);
-		DrawNewDialogBox(SPRID_INTERFACE_ND_GAME2, sX, sY, 3);
-		DrawNewDialogBox(SPRID_INTERFACE_ND_GAME2, sX+242, sY + iPointerLoc + 35, 7);
-
-		if(cLB != 0) {
-			if ((iGetTopDialogBoxIndex() == 13)) {
-				if ((msX >= sX + 235) && (msX <= sX + 260) && (msY >= sY + 10) && (msY <= sY + 330)) {
-					d1 = (double)(msY -(sY+35));
-					d2 = (double)(CMD_LGNSVC_MAX-16);
-					d3 = (d1 * d2)/274.0f;
-					m_stDialogBoxInfo[13].sView = (int)(d3+0.5);
-				}	
-			}
-		}else m_stDialogBoxInfo[13].bIsScrollSelected = FALSE;
-
-		if( iGetTopDialogBoxIndex() == 13 && msZ != 0 ) {
-			m_stDialogBoxInfo[13].sView = m_stDialogBoxInfo[13].sView - msZ/60;
-			m_DInput.m_sZ = 0;
-		}
-		if( m_stDialogBoxInfo[13].sView > CMD_LGNSVC_MAX-16 ) m_stDialogBoxInfo[13].sView = CMD_LGNSVC_MAX-16;
-		if( m_stDialogBoxInfo[13].sView < 0 ) m_stDialogBoxInfo[13].sView = 0;
-
-		for (i = 0; i < 16; i++)
-		{
-			if(i+ m_stDialogBoxInfo[13].sView < CMD_LGNSVC_MAX)
-			{
-				if ((msX > sX-8) && (msX < sX + szX - 20) && (msY > sY + 73 + 15*i) && (msY < sY + 87 + 15*i))
-				{
-					PutAlignedString(sX-30, sX + szX, sY + 75 + 15*i, lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].desc, 255,255,255);
-					wsprintf(cTxt, "%u", lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].price);
-					PutAlignedString(sX + 190, sX + szX, sY + 75 + 15*i, cTxt, 255,255,255);
-				}
-				else {
-					PutAlignedString(sX-30, sX + szX, sY + 75 + 15*i, lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].desc, 4,0,50);
-					wsprintf(cTxt, "%u", lgnPtsSvcs[i + m_stDialogBoxInfo[13].sView].price);
-					PutAlignedString(sX + 190, sX + szX, sY + 75 + 15*i, cTxt, 4,0,50);
-				}
-			}
-		}
-		
-		break;
+		break;	
 
 	case TELEPORTLIST:// Teleport List
 		if( m_iTeleportMapCount > 0 )
