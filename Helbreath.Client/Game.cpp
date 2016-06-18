@@ -705,8 +705,8 @@ BOOL CGame::bInit(HWND hWnd, HINSTANCE hInst, char * pCmdLine)
 	}
 
 
-	m_hPakFile = CreateFile("sprites\\lgn_dialog.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
-	m_pSprite[SPRID_INTERFACE_ND_LOADING] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_dialog", 0, FALSE);
+	m_hPakFile = CreateFile("sprites\\New-Dialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+	m_pSprite[SPRID_INTERFACE_ND_LOADING] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 0, FALSE);
 	CloseHandle(m_hPakFile);
 
 	m_hPakFile = CreateFile("sprites\\interface2.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
@@ -2678,9 +2678,9 @@ void CGame::UpdateScreen_OnMainMenu()
  //StartBGM();
  RECT buttons[3];
 
- SetRect(&buttons[0], 275, 196, 365, 215);
- SetRect(&buttons[1], 275, 230, 365, 249);
- SetRect(&buttons[2], 275, 262, 365, 281);
+ SetRect(&buttons[0], 384, 177, 548, 198);
+ SetRect(&buttons[1], 384, 215, 548, 236);
+ SetRect(&buttons[2], 384, 254, 548, 275);
 
 
  m_iItemDropCnt = 0;
@@ -2692,17 +2692,19 @@ void CGame::UpdateScreen_OnMainMenu()
 			G_pCalcSocket = NULL;
 		}
 		if ( m_pSprite[SPRID_INTERFACE_ND_LOADING] != NULL )
-		{	delete m_pSprite[SPRID_INTERFACE_ND_LOADING];
+		{	
+			delete m_pSprite[SPRID_INTERFACE_ND_LOADING];
 			m_pSprite[SPRID_INTERFACE_ND_LOADING] = NULL;
 		}
 		EndInputString();
 		pMI = new class CMouseInterface;
 
-		for(int n=0; n < 3; n++)
+		for (int n = 0; n < 3; n++) {
 			pMI->AddRect(buttons[n].left, buttons[n].top, buttons[n].right, buttons[n].bottom);
+		}
 
-		//m_DInput.m_sX = 400;
-		//m_DInput.m_sY = 240;
+		m_DInput.m_sX = 400;
+		m_DInput.m_sY = 240;
 
 		m_cCurFocus = 1;
 		m_cMaxFocus = 3;
@@ -2908,7 +2910,9 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 {
 	int i;
 	std::vector<int> framePositions;
-	if( bActive ) UpdateScreen_OnLoading_Progress();
+	if (bActive) {
+		UpdateScreen_OnLoading_Progress();
+	}
 
 	switch( m_cLoading ) {
 	case 0:
@@ -2935,8 +2939,8 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 
 			m_hPakFile = CreateFile("sprites\\LoginDialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
-				ReadFramePositions(m_hPakFile, framePositions, 3);
-				m_pSprite[SPRID_INTERFACE_ND_LOGIN] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_login", 0, FALSE, &framePositions);
+				ReadFramePositions(m_hPakFile, framePositions, 10);
+				m_pSprite[SPRID_INTERFACE_ND_LOGIN] = new class CSprite(m_hPakFile, &m_DDraw, "LoginDialog", 0, FALSE, &framePositions);
 #ifdef MAKE_ACCOUNT
 				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "LoginDialog", 1, FALSE, &framePositions);
 				m_pSprite[SPRID_INTERFACE_ND_AGREEMENT] = new class CSprite(m_hPakFile, &m_DDraw, "LoginDialog", 2, FALSE, &framePositions);
@@ -2945,11 +2949,12 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 				framePositions.clear();
 			}
 #ifdef MAKE_ACCOUNT			// CLEROTH - ACC - Snoopy: fixed to use without special pak
-			m_hPakFile = CreateFile("sprites\\CreateNewAcc.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
+			m_hPakFile = CreateFile("sprites\\lgn_newacc.lpk", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
-				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "CreateNewAcc", 0, FALSE);
+				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "lgn_newacc", 0, FALSE);
 				CloseHandle(m_hPakFile);
-			}else
+			}
+			else
 			{	m_hPakFile = CreateFile("sprites\\New-Dialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 				m_pSprite[SPRID_INTERFACE_ND_NEWACCOUNT] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 2, FALSE);
 				CloseHandle(m_hPakFile);
@@ -2957,7 +2962,7 @@ void CGame::UpdateScreen_OnLoading(bool bActive)
 #endif
 			m_hPakFile = CreateFile("sprites\\New-Dialog.pak", GENERIC_READ, NULL, NULL, OPEN_EXISTING, NULL, NULL);
 			if( m_hPakFile != INVALID_HANDLE_VALUE ) {
-				ReadFramePositions(m_hPakFile, framePositions, 3);
+				ReadFramePositions(m_hPakFile, framePositions, 10);
 				m_pSprite[SPRID_INTERFACE_ND_MAINMENU] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 1, FALSE, &framePositions);
 				m_pSprite[SPRID_INTERFACE_ND_QUIT] = new class CSprite(m_hPakFile, &m_DDraw, "New-Dialog", 2, FALSE, &framePositions);
 				CloseHandle(m_hPakFile);
@@ -3688,7 +3693,7 @@ void CGame::UpdateScreen_OnLoading_Progress()
 	DrawVersion(TRUE);
 	int iBarWidth;
 	iBarWidth= (int)m_cLoading * (m_pSprite[SPRID_INTERFACE_ND_LOADING]->m_stBrush[1].szx / 100);
-	m_pSprite[SPRID_INTERFACE_ND_LOADING]->PutSpriteFastWidth(391,434, 1, iBarWidth, G_dwGlobalTime);
+	m_pSprite[SPRID_INTERFACE_ND_LOADING]->PutSpriteFastWidth(472,442, 1, iBarWidth, G_dwGlobalTime);
 
 	//PutString(239, 196, "Helbreath is loading...", RGB(60,60,60));
 	//PutString(238, 195, "Helbreath  is loading...", RGB(230,230,230));
@@ -23823,12 +23828,13 @@ void CGame::UpdateScreen_OnLogin() // here
 	sX = 146;
 	sY = 114;
 	if (m_cGameModeCount == 0)
-	{	EndInputString();
+	{	
+		EndInputString();
 		pMI = new class CMouseInterface;
-		pMI->AddRect(308, 192, 408, 208); // Username
-		pMI->AddRect(308, 224, 408, 240); // Password
-		pMI->AddRect(240, 306, 286, 318); // Connect 
-		pMI->AddRect(340, 306, 396, 318); // Cancel
+		pMI->AddRect(80, 151, 337, 179);
+		pMI->AddRect(80, 180, 337, 205);
+		pMI->AddRect(80, 280, 163, 302);
+		pMI->AddRect(258, 280, 327, 302);
 		cPrevFocus  = 1;
 		m_cCurFocus = 1;
 		m_cMaxFocus = 4;
@@ -23836,7 +23842,7 @@ void CGame::UpdateScreen_OnLogin() // here
 		m_cArrowPressed = 0;
 		ZeroMemory(cName, sizeof(cName));
 		ZeroMemory(cPassword, sizeof(cPassword));
-		StartInputString(312, 192, 11, cName);
+		StartInputString(180, 162, 11, cName);
 		ClearInputString();
 	}
 
@@ -23869,7 +23875,8 @@ void CGame::UpdateScreen_OnLogin() // here
 	}
 
 	if (m_bEnterPressed == TRUE)
-	{	m_bEnterPressed = FALSE;
+	{	
+		m_bEnterPressed = FALSE;
 		PlaySound('E', 14, 5);
 
 		switch (m_cCurFocus) {
@@ -23915,10 +23922,10 @@ void CGame::UpdateScreen_OnLogin() // here
 	{	EndInputString();
 		switch (m_cCurFocus) {
 		case 1:
-			StartInputString(312, 192, 11, cName);
+			StartInputString(180, 162, 11, cName);
 			break;
 		case 2:
-			StartInputString(312, 224, 11, cPassword, TRUE);
+			StartInputString(180, 185, 11, cPassword, TRUE);
 			break;
 		case 3:
 		case 4:
@@ -23968,10 +23975,12 @@ void CGame::UpdateScreen_OnLogin() // here
 			return;
 	}	}
 
-	if ((msX >= 240) && (msY >= 307) && (msX <= 286) && (msY <= 318)) 
+	if ((msX >= 80) && (msX <= 163) && (msY >= 280) && (msY <= 302)) {
 		m_cCurFocus = 3;
-	if ((msX >= 340) && (msY >= 307) && (msX <= 395) && (msY <= 318)) 
+	}
+	if ((msX >= 258) && (msX <= 327) && (msY >= 280) && (msY <= 302)) {
 		m_cCurFocus = 4;
+	}
 
 	_Draw_OnLogin(cName, cPassword, msX, msY, m_cGameModeCount);
 	if (m_DDraw.iFlip() == DDERR_SURFACELOST) RestoreSprites();
@@ -39613,38 +39622,55 @@ void CGame::_Draw_OnLogin(char *pAccount, char *pPassword, int msX, int msY, int
 	DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 0,0,0, TRUE);
 	DrawVersion();
 
-	//if ((iFrame >= 15) && (iFrame <= 20)) m_pSprite[SPRID_INTERFACE_ND_LOGIN]->PutTransSprite25(39,121, 2, TRUE);
-	//else if (iFrame > 20) DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 39,121, 2, TRUE);
-
-	if (m_cCurFocus != 1) {
-		if (m_Misc.bCheckValidName(pAccount) != FALSE)
-			 PutString2(312, 192, pAccount, 200,200,200);
-		else PutString2(312, 192, pAccount, 200,100,100);
+	if ((iFrame >= 15) && (iFrame <= 20)) {
+		m_pSprite[SPRID_INTERFACE_ND_LOGIN]->PutTransSprite25(39, 121, 2, TRUE);
 	}
-	if ((m_Misc.bCheckValidName(pAccount) == FALSE) || (strlen(pAccount) == 0)) bFlag = FALSE;
+	else if (iFrame > 20) {
+		DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 39, 121, 2, TRUE);
+	}
+	if (m_cCurFocus != 1) {
+		if (m_Misc.bCheckValidName(pAccount) != FALSE) {
+			PutString2(180, 162, pAccount, 200, 200, 200);
+		}
+		else {
+			PutString2(180, 162, pAccount, 200, 100, 100);
+		}
+	}
+	if ((m_Misc.bCheckValidName(pAccount) == FALSE) || (strlen(pAccount) == 0)) {
+		bFlag = FALSE;
+	}
 
 	if (m_cCurFocus != 2) {
-		if ((m_Misc.bCheckValidString(pPassword) != FALSE))
-			 PutString(312, 224, pPassword, RGB(200,200,200), TRUE, 1);
-		else PutString(312, 224, pPassword, RGB(200,100,100), TRUE, 1);
+		if ((m_Misc.bCheckValidString(pPassword) != FALSE)) {
+			PutString(180, 185, pPassword, RGB(200, 200, 200), TRUE, 1);
+		}
+		else {
+			PutString(180, 185, pPassword, RGB(200, 100, 100), TRUE, 1);
+		}
 	}
-	if ((m_Misc.bCheckValidString(pPassword) == FALSE) || (strlen(pPassword) == 0)) bFlag = FALSE;
+	if ((m_Misc.bCheckValidString(pPassword) == FALSE) || (strlen(pPassword) == 0)) {
+		bFlag = FALSE;
+	}
 
-	if (m_cCurFocus == 1)
+	if (m_cCurFocus == 1) {
 		ShowReceivedString();
-	else
-	if (m_cCurFocus == 2)
-		ShowReceivedString(TRUE);
-
-	if (bFlag == TRUE)
-	{	
-		if (m_cCurFocus == 3) 
-			DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 241,307, 1, TRUE);
 	}
-	if (m_cCurFocus == 4) 
-		DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 340,307,2, TRUE);
+	else {
+		if (m_cCurFocus == 2) {
+			ShowReceivedString(TRUE);
+		}
+	}
+	if (bFlag == TRUE)
+	{
+		if (m_cCurFocus == 3) {
+			DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 80, 282, 3, TRUE);
+		}
+	}
+	if (m_cCurFocus == 4) {
+		DrawNewDialogBox(SPRID_INTERFACE_ND_LOGIN, 256, 282, 4, TRUE);
+	}
 	if ((m_bIsHideLocalCursor != TRUE) && (msX != 0) && (msY != 0)) {
-	m_pSprite[SPRID_MOUSECURSOR]->PutSpriteFast(msX, msY, 0, dwTime);
+		m_pSprite[SPRID_MOUSECURSOR]->PutSpriteFast(msX, msY, 0, dwTime);
 	}
 }
 
