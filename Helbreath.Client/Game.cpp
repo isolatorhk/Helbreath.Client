@@ -24234,16 +24234,6 @@ void CGame::OnKeyUp(WPARAM wParam)
 			}
 		}
 		break;
-#ifdef _DEBUG
-	case 81://'Q'
-		if( ( m_bCtrlPressed == TRUE ) && ( m_cGameMode == GAMEMODE_ONMAINGAME ) )
-		{	ZeroMemory(m_cChatMsg, sizeof(m_cChatMsg) );
-			strcpy(m_cChatMsg, "/enableadmincommand 147258 ");
-			StartInputString(10, 414, sizeof(m_cChatMsg), m_cChatMsg);
-			//ClearInputString();
-		}
-		break;
-#endif
 
 	case 82://'R'
 		if (m_bCtrlPressed == TRUE && m_cGameMode == GAMEMODE_ONMAINGAME && (!m_bInputStatus) )
