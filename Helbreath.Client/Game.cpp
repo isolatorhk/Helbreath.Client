@@ -1585,6 +1585,21 @@ BOOL CGame::bSendCommand(DWORD dwMsgID, WORD wCommand, char cDir, int iV1, int i
 			iRet = m_pGSock->iSendMsg(cMsg, 37);
 			break;
 
+	//: naprawa all itemow w bagu - .
+    #ifdef DEF_REPAIR_ALL
+	case DEF_REPAIR_ALL_SIGNAL:
+		dwp = (DWORD *)(cMsg + DEF_INDEX4_MSGID);
+		*dwp = dwMsgID;
+		wp  = (WORD *)(cMsg + DEF_INDEX2_MSGTYPE);
+		*wp = NULL;
+		cp = (char *)(cMsg + DEF_INDEX2_MSGTYPE + 2);
+		dwp = (DWORD *)cp;
+		*dwp = dwTime;
+		cp += 4;
+		iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
+		break;
+       #endif
+
 		// Create Slate Request - Diuuude
 		case COMMONTYPE_REQ_CREATESLATE:
 			*cp = (char)m_stDialogBoxInfo[40].sV1;
@@ -34466,6 +34481,7 @@ void CGame::DrawDialogBox_NpcActionQuery(short msX, short msY)
 		}
 		break;
 
+			//Dzon: Repair All wyswietlanie
 	case 5: // Shop / BS
 		DrawNewDialogBox(SPRID_INTERFACE_ND_GAME2, sX, sY, 6);
 		switch (m_stDialogBoxInfo[20].sV3) {
@@ -34479,7 +34495,7 @@ void CGame::DrawDialogBox_NpcActionQuery(short msX, short msY)
 			break;
 		}
 
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+		if ((msX > sX + 25) && (msX < sX + 65) && (msY > sY + 55) && (msY < sY + 70))
 		{	PutString(sX + 28, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY21, RGB(255,255,255));//"Trade"
 			PutString(sX + 29, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY21, RGB(255,255,255));
 		}else
@@ -34487,20 +34503,36 @@ void CGame::DrawDialogBox_NpcActionQuery(short msX, short msY)
 			PutString(sX + 29, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY21, RGB(4,0,50));
 		}
 
-		if ((msX > sX + 25 +79) && (msX < sX + 80 +75) && (msY > sY + 55) && (msY < sY + 70))
-		{	PutString(sX + 28 +75, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(255,255,255));//"Sell"
-			PutString(sX + 29 +75, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(255,255,255));
+		if ((msX > sX + 70) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+		{	PutString(sX +71, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(255,255,255));//"Sell"
+			PutString(sX +72, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(255,255,255));
 		}else
-		{	PutString(sX + 28 +75, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(4,0,50));
-			PutString(sX + 29 +75, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(4,0,50));
+		{	PutString(sX +71, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(4,0,50));
+			PutString(sX +72, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY39, RGB(4,0,50));
 		}
+//Chilliage: Repair all - 30 kwiecien 2011r.
+#ifdef DEF_REPAIR_ALL
+		//poprawka 9 maj 201r. - tylko bs
+		if(m_stDialogBoxInfo[20].sV3 == 24)
+		{
+			if ((msX > sX + 110) && (msX < sX + 165) && (msY > sY + 55) && (msY < sY + 70))
+			{	PutString(sX + 111, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY44, RGB(255,255,255));//"Repair All"
+				PutString(sX + 112, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY44, RGB(255,255,255));
+			}
+			else
+			{	PutString(sX + 111, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY44, RGB(4,0,50));
+				PutString(sX + 112, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY44, RGB(4,0,50));
+			}
+		}
+#endif
+
 		if (m_bIsDialogEnabled[21] == FALSE)
-		{	if ((msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
-			{	PutString(sX + 155, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(255,255,255));//"Talk"
-				PutString(sX + 156, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(255,255,255));
+		{	if ((msX > sX + 180) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
+			{	PutString(sX + 181, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(255,255,255));//"Talk"
+				PutString(sX + 182, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(255,255,255));
 			}else
-			{	PutString(sX + 155, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(4,0,50));
-				PutString(sX + 156, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(4,0,50));
+			{	PutString(sX + 181, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(4,0,50));
+				PutString(sX + 182, sY + 55, DRAW_DIALOGBOX_NPCACTION_QUERY25, RGB(4,0,50));
 		}	}
 		break;
 
@@ -34548,7 +34580,24 @@ void CGame::DrawDialogBox_NpcActionQuery(short msX, short msY)
 		}else
 		{	PutString(sX + 25, sY + 50, DRAW_BLACKSMITH4, RGB(4,0,50));
 			PutString(sX + 26, sY + 50, DRAW_BLACKSMITH4, RGB(4,0,50));
+			PutString(sX + 26, sY + 50, DRAW_BLACKSMITH4, RGB(4,0,50));
 		}
+		// Repair all 
+#ifdef DEF_REPAIR_ALL
+		if (m_stDialogBoxInfo[20].sV3 == 24)
+		{
+			if ((msX > sX + 110) && (msX < sX + 165) && (msY > sY + 55) && (msY < sY + 70))
+			{
+				PutString(sX + 131, sY + 55, DRAW_BLACKSMITH5, RGB(255, 255, 255));//"Repair All"
+				PutString(sX + 132, sY + 55, DRAW_BLACKSMITH5, RGB(255, 255, 255));
+			}
+			else
+			{
+				PutString(sX + 131, sY + 55, DRAW_BLACKSMITH5, RGB(4, 0, 50));
+				PutString(sX + 132, sY + 55, DRAW_BLACKSMITH5, RGB(4, 0, 50));
+			}
+		}
+#endif
 		PutString(sX +65, sY +5, DRAW_BLACKSMITH, RGB(0,0,0));
 		PutString(sX +65 -1, sY +5 -1, DRAW_BLACKSMITH, RGB(255,255,255));
 		PutString(sX +61, sY +5, "________________", RGB(0,0,0));
@@ -36722,6 +36771,8 @@ void CGame::DlgBoxClick_NpcActionQuery(short msX, short msY)
 		}
 		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
 		{	switch (m_stDialogBoxInfo[20].sV1) {
+
+
 			case 7:	// Guild
 				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);
 				AddEventList(TALKING_TO_GUILDHALL_OFFICER, 10);
@@ -36827,26 +36878,30 @@ void CGame::DlgBoxClick_NpcActionQuery(short msX, short msY)
 		break;
 
 
-	case 5: // Talk  slit shop 
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70)) {
-		if((m_stDialogBoxInfo[20].sV2 == 1)&&(m_stDialogBoxInfo[20].sV1 == 11)) {
-			EnableDialogBox(52, NULL, NULL, NULL);
+	case 5: // Talk
+		if ((msX > sX + 25) && (msX < sX + 58) && (msY > sY + 55) && (msY < sY + 70))
+		{	EnableDialogBox(m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, NULL);
 			DisableDialogBox(20);
-			}
-			if((m_stDialogBoxInfo[20].sV2 == 2) && (m_stDialogBoxInfo[20].sV1 == 11)) {
-			EnableDialogBox(53, NULL, NULL, NULL);
-			DisableDialogBox(20);
-			}
-			if((m_stDialogBoxInfo[20].sV2 != 2) && (m_stDialogBoxInfo[20].sV2 != 1) && (m_stDialogBoxInfo[20].sV1 != 11)) {
-			EnableDialogBox(m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, NULL);
-			DisableDialogBox(20);
-			}
 		}
-		if ((msX > sX + 25 +75) && (msX < sX + 80 +75) && (msY > sY + 55) && (msY < sY + 70))
+
+		if ((msX > sX + 80) && (msX < sX + 106) && (msY > sY + 55) && (msY < sY + 70))
 		{	EnableDialogBox(31, NULL, NULL, NULL);
 			DisableDialogBox(20);
 		}
-		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
+//Chilliage: Repair all - 30 kwiecien 2011r.
+#ifdef DEF_REPAIR_ALL
+		//poprawka 9 maj 201r. - tylko bs
+		if(m_stDialogBoxInfo[20].sV3 == 24)
+		{
+			if ((msX > sX + 120) && (msX < sX + 172) && (msY > sY + 55) && (msY < sY + 70))
+			{
+				//wyslij sygnal z prosba o naprawe wszystkich itemow
+				bSendCommand(DEF_REPAIR_ALL_SIGNAL, DEF_MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+				DisableDialogBox(20);
+			}
+		}
+#endif
+		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 187) && (msX < sX + 212) && (msY > sY + 55) && (msY < sY + 70))
 		{	switch (m_stDialogBoxInfo[20].sV1) {
 			case 7:	// Guild
 				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);

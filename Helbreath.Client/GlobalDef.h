@@ -38,6 +38,7 @@
 	#define SPEEDHAX_RUN	1
 	#define SPEEDHAX_ATK 1
 	#define SPEEDHAX_HIT	1
+    #define DEF_REPAIR_ALL	1
 #endif
 		
 #endif
