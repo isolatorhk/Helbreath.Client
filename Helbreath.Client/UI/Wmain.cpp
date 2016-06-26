@@ -231,7 +231,7 @@ BOOL InitInstance( HINSTANCE hInstance, int nCmdShow )
 {	int cx = GetSystemMetrics(SM_CXFULLSCREEN)/2;
 	int cy = GetSystemMetrics(SM_CYFULLSCREEN)/2;
 	if(cy>280) cy -= 40;
-	G_hWnd = CreateWindowEx(NULL, szAppClass, "Helbreath Legion", WS_POPUP, cx-320, cy-240, 
+	G_hWnd = CreateWindowEx(NULL, szAppClass, "Helbreath Poland", WS_POPUP, cx-320, cy-240, 
 							640, 480, NULL, NULL, hInstance, NULL);  
     if (!G_hWnd) return FALSE;
     G_hInstance	= hInstance;
