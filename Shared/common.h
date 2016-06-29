@@ -118,9 +118,10 @@ enum EventType{
 	ET_CAPTURE, 
 	ET_DESTROY_SHIELD,
 	ET_CRUSADE,
+	ET_HELLCLAW_SUMMON_ML,
 	ET_MAX
 };
-static const char * eventName[] = { "", "Capture the Relic", "Destroy the Shield", "Crusade" };
+static const char * eventName[] = { "", "Capture the Relic", "Destroy the Shield", "Crusade", "Summon Hellclaw Middleland" };
 
 struct Casualties{
 	uint32 deaths;

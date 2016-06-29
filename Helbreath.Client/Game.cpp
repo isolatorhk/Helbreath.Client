@@ -39348,12 +39348,16 @@ void CGame::NotifyMsg_EventStart(char * pData)
 	{
 	case ET_CAPTURE:
 		wsprintf(G_cTxt, NOTIFYMSG_EVENTSTART_CTR);
+		strcat(G_cTxt, NOTIFYMSG_EVENTSTART);
+		break;
+	case ET_HELLCLAW_SUMMON_ML:
+		wsprintf(G_cTxt, NOTIFYMSG_EVENTSTART_HC_ML);
 		break;
 	default:
 		return;
 	}
 
-	strcat(G_cTxt, NOTIFYMSG_EVENTSTART);
+	
 	SetTopMsg(G_cTxt, 10);
 }
 

@@ -1686,6 +1686,7 @@
 
 
 #define	NOTIFYMSG_EVENTSTART_CTR	"A Capture the Relic event has begun in Astoria!"
+#define	NOTIFYMSG_EVENTSTART_HC_ML	"Hellclaw has emerged to surface on middleland, kill it!"
 #define	NOTIFYMSG_EVENTSTART			" Go to your nation's command's hall to teleport."
 
 #define	NOTIFYMSG_RELICGRABBED		"The relic was grabbed by %s!"
